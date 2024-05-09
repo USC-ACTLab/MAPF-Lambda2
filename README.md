@@ -1,5 +1,5 @@
 # MAPF-Lambda2
-This is the code repo for ICAPS-24 paper: "Map Connectivity and Empirical Hardness of Grid-based Multi-Agent Pathfinding Problem"
+This is the code repo for ICAPS-24 paper: "[Map Connectivity and Empirical Hardness of Grid-based Multi-Agent Pathfinding Problem](http://idm-lab.org/bib/abstracts/papers/icaps24c.pdf)"
 
 # Dataset
 
@@ -10,3 +10,8 @@ The following figure shows the detailed map information for Experiment 1 in the 
 # Usage
 
 Coming Soon
+
+Please cite the following paper if you find the results in this paper is helpful:
+
+[1.] Ren, J., Ewing, E., Kumar, T. S., Koenig, S., & Ayanian, N. (2024). Map Connectivity and Empirical Hardness of Grid-based Multi-Agent Pathfinding Problem. In 34th International Conference on Automated Planning and Scheduling.
+
