@@ -3,16 +3,39 @@ import networkx as nx
 import numpy as np
 import yaml
 
-map_folder = "./dataset/ICAPS-24/"
-map_name = "random-32-32-10.yaml"
-yaml_map = map_folder + map_name
+map_folder = "./dataset/MAPF_Benchmark/"
+map_name = "maze-32-32-4.map"
+map_path = map_folder + map_name
 
-# load map
-with open(yaml_map) as f:
-    map_data = yaml.load(f, Loader=yaml.FullLoader)
-dim_x = map_data["dimensions"][0]
-dim_y = map_data["dimensions"][1]
-obs = map_data["obstacles"]
+# load yaml map
+if map_path.split('.')[-1] == "yaml":
+    with open(map_path) as f:
+        map_data = yaml.load(f, Loader=yaml.FullLoader)
+    dim_x = map_data["dimensions"][0]
+    dim_y = map_data["dimensions"][1]
+    obs = map_data["obstacles"]
+# load MAPF benchmark map
+elif map_path.split('.')[-1] == "map":
+    with open(map_path) as f:
+        if f.readline() != "type octile\n":
+            print("Bad mapfile!")
+            exit()
+        else:
+            dim_y = int(f.readline().split(" ")[-1])
+            dim_x = int(f.readline().split(" ")[-1])
+            f.readline()
+            x = y = 0
+            obs = []
+            for line in f.readlines():
+                for l in line:
+                    if l != ".":
+                        obs.append([x, y])
+                    x += 1
+                x = 0
+                y += 1
+else:
+    print("Only support .yaml and .map format!")
+    exit()
 
 # ceate graph
 G = nx.Graph()
@@ -35,4 +58,6 @@ for i in range(dim_x):
 
 # calculate eigen values
 eigen = nx.normalized_laplacian_spectrum(G)
+print('map: %s' % map_name)
 print('lambda2 is: %f' % eigen[1])
+
